@@ -28,12 +28,12 @@ const Hero = () => {
         <div className="absolute -bottom-8 left-40 w-72 h-72 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float dark:bg-pink-500" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      <div className="container-custom relative z-10">
+      <div className="container-custom relative z-10 px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="text-center"
+          className="text-center max-w-full"
         >
           {/* Greeting */}
           <motion.div
@@ -48,7 +48,7 @@ const Hero = () => {
           {/* Name */}
           <motion.h1
             variants={itemVariants}
-            className="text-6xl md:text-8xl font-bold text-gray-900 dark:text-white mb-6 gradient-text"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 dark:text-white mb-6 gradient-text break-words"
           >
             {personal.name}
           </motion.h1>
@@ -56,7 +56,7 @@ const Hero = () => {
           {/* Title */}
           <motion.h2
             variants={itemVariants}
-            className="text-2xl md:text-3xl font-semibold text-gray-700 dark:text-gray-300 mb-8"
+            className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-700 dark:text-gray-300 mb-8"
           >
             {personal.title}
           </motion.h2>
@@ -64,7 +64,7 @@ const Hero = () => {
           {/* Description */}
           <motion.p
             variants={itemVariants}
-            className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed"
+            className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed px-4"
           >
             {personal.bio}
           </motion.p>
@@ -72,13 +72,13 @@ const Hero = () => {
           {/* CTA Buttons */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16"
+            className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-16 px-4"
           >
             <motion.button
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
-              className="btn-primary flex items-center gap-3"
+              className="btn-primary flex items-center gap-3 w-full sm:w-auto"
             >
               Get In Touch
               <ArrowRight size={20} />
@@ -88,7 +88,7 @@ const Hero = () => {
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}
-              className="btn-secondary"
+              className="btn-secondary w-full sm:w-auto"
             >
               View My Work
             </motion.button>
@@ -139,7 +139,7 @@ const Hero = () => {
           {/* Scroll Indicator */}
           <motion.div
             variants={itemVariants}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+            className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-20"
           >
             <motion.div
               whileHover={{ scale: 1.1 }}
@@ -150,13 +150,8 @@ const Hero = () => {
               onClick={() => document.getElementById('about').scrollIntoView({ behavior: 'smooth' })}
             >
               <div className="text-gray-400 dark:text-gray-500 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors duration-300">
-                <ChevronDown size={24} />
+                <ChevronDown size={20} className="sm:w-6 sm:h-6" />
               </div>
-              {/* <motion.div
-                animate={{ y: [0, 4, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                className="w-1 h-8 bg-gradient-to-b from-gray-400 to-transparent dark:from-gray-500 rounded-full"
-              /> */}
               <span className="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors duration-300 font-medium tracking-wide">
                 Scroll Down
               </span>

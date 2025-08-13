@@ -76,8 +76,8 @@ const Experience = () => {
           {/* Timeline Line */}
           <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-600"></div>
 
-          <div className="space-y-12">
-            {experience.map((job, index) => (
+          <div className="space-y-8 lg:space-y-12">
+            {[...experience].reverse().map((job, index) => (
               <motion.div
                 key={job.id}
                 variants={itemVariants}
@@ -86,42 +86,42 @@ const Experience = () => {
                 }`}
               >
                 {/* Timeline Dot */}
-                <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-8 h-8 bg-blue-600 dark:bg-blue-400 rounded-full border-4 border-white dark:border-gray-800 shadow-lg z-10"></div>
+                <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-6 h-6 md:w-8 md:h-8 bg-blue-600 dark:bg-blue-400 rounded-full border-4 border-white dark:border-gray-800 shadow-lg z-10"></div>
 
                 {/* Content Card */}
-                <div className={`ml-16 md:ml-0 md:w-5/12 ${
-                  index % 2 === 0 ? 'md:mr-auto md:pr-8' : 'md:ml-auto md:pl-8'
+                <div className={`ml-12 md:ml-0 md:w-5/12 ${
+                  index % 2 === 0 ? 'md:mr-auto md:pr-6 lg:pr-8' : 'md:ml-auto md:pl-6 lg:pl-8'
                 }`}>
-                  <div className="card p-6 hover:shadow-lg transition-all duration-300">
+                  <div className="card p-4 lg:p-6 hover:shadow-lg transition-all duration-300">
                     {/* Job Header */}
-                    <div className="flex items-start justify-between mb-4">
+                    <div className="flex items-start justify-between mb-3 lg:mb-4">
                       <div className="flex-1">
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
+                        <h3 className="text-lg lg:text-xl font-bold text-gray-900 dark:text-white mb-1">
                           {job.position}
                         </h3>
                         <div className="flex items-center space-x-2 text-blue-600 dark:text-blue-400 font-medium mb-2">
-                          <Building size={16} />
-                          <span>{job.company}</span>
+                          <Building size={14} className="lg:w-4 lg:h-4" />
+                          <span className="text-sm lg:text-base">{job.company}</span>
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-medium rounded-full">
+                        <div className="px-2 lg:px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-medium rounded-full">
                           {getDuration(job.startDate, job.endDate)}
                         </div>
                       </div>
                     </div>
 
                     {/* Job Details */}
-                    <div className="space-y-3 mb-4">
-                      <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-300">
-                        <Calendar size={14} />
+                    <div className="space-y-2 lg:space-y-3 mb-3 lg:mb-4">
+                      <div className="flex items-center space-x-2 text-xs lg:text-sm text-gray-600 dark:text-gray-300">
+                        <Calendar size={12} className="lg:w-3.5 lg:h-3.5" />
                         <span>
                           {formatDate(job.startDate)} - {job.endDate ? formatDate(job.endDate) : 'Present'}
                         </span>
                       </div>
-                      <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-300">
-                        <MapPin size={14} />
-                        <span>{job.location}</span>
+                      <div className="flex items-center space-x-2 text-xs lg:text-sm text-gray-600 dark:text-gray-300">
+                        <MapPin size={12} className="lg:w-3.5 lg:h-3.5" />
+                        <span className="break-words">{job.location}</span>
                       </div>
                     </div>
 
@@ -133,14 +133,14 @@ const Experience = () => {
                     {/* Achievements */}
                     {job.achievements && job.achievements.length > 0 && (
                       <div>
-                        <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
+                        <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm lg:text-base">
                           Key Achievements:
                         </h4>
-                        <ul className="space-y-2">
+                        <ul className="space-y-1 lg:space-y-2">
                           {job.achievements.map((achievement, achievementIndex) => (
-                            <li key={achievementIndex} className="flex items-start space-x-2 text-sm text-gray-600 dark:text-gray-300">
-                              <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
-                              <span>{achievement}</span>
+                            <li key={achievementIndex} className="flex items-start space-x-2 text-xs lg:text-sm text-gray-600 dark:text-gray-300">
+                              <span className="w-1 h-1 lg:w-1.5 lg:h-1.5 bg-blue-500 rounded-full mt-1.5 lg:mt-2 flex-shrink-0"></span>
+                              <span className="break-words">{achievement}</span>
                             </li>
                           ))}
                         </ul>
@@ -149,15 +149,15 @@ const Experience = () => {
 
                     {/* Technologies Used */}
                     {job.technologies && job.technologies.length > 0 && (
-                      <div className="mt-4">
-                        <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
+                      <div className="mt-3 lg:mt-4">
+                        <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm lg:text-base">
                           Technologies Used:
                         </h4>
-                        <div className="flex flex-wrap gap-2">
+                        <div className="flex flex-wrap gap-1 lg:gap-2">
                           {job.technologies.map((tech, techIndex) => (
                             <span
                               key={techIndex}
-                              className="px-2 py-1 bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300 text-xs font-medium rounded"
+                              className="px-2 lg:px-2 py-1 bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300 text-xs font-medium rounded"
                             >
                               {tech}
                             </span>

@@ -90,7 +90,7 @@ const Projects = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex flex-wrap justify-center gap-4 mb-12"
+          className="flex flex-wrap justify-center gap-3 lg:gap-4 mb-8 lg:mb-12"
         >
           {filters.map((filter) => (
             <motion.button
@@ -100,7 +100,7 @@ const Projects = () => {
               onClick={() => {
                 setActiveFilter(filter.id);
               }}
-              className={`px-6 py-2 rounded-full font-medium transition-all duration-200 ${
+              className={`px-4 lg:px-6 py-2 rounded-full font-medium transition-all duration-200 text-sm lg:text-base ${
                 activeFilter === filter.id
                   ? 'bg-blue-600 text-white shadow-md'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'
@@ -111,13 +111,20 @@ const Projects = () => {
           ))}
         </motion.div>
 
+        {/* Projects Count */}
+        <div className="text-center mb-6 lg:mb-8">
+          <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">
+            Showing {filteredProjects.length} of {projects.length} projects
+          </p>
+        </div>
+
         {/* Projects Grid */}
         <motion.div
-          key={activeFilter} // Force re-animation when filter changes
+          key={activeFilter}
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
         >
           {filteredProjects && filteredProjects.length > 0 ? (
             filteredProjects.map((project, index) => (

@@ -82,20 +82,20 @@ const Skills = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
         >
           {skillCategories.map((category, index) => (
             <motion.div
               key={category.title}
               variants={itemVariants}
-              className="card card-hover p-6"
+              className="card card-hover p-4 lg:p-6"
             >
               {/* Category Header */}
-              <div className="flex items-center space-x-3 mb-6">
+              <div className="flex items-center space-x-3 mb-4 lg:mb-6">
                 <div className={`p-2 rounded-lg ${getColorClasses(category.color)}`}>
                   {category.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                <h3 className="text-lg lg:text-xl font-semibold text-gray-900 dark:text-white">
                   {category.title}
                 </h3>
               </div>
@@ -111,9 +111,9 @@ const Skills = () => {
                     transition={{ delay: skillIndex * 0.1 }}
                     className="flex items-center justify-between"
                   >
-                    <span className="text-gray-700 dark:text-gray-300 font-medium">{skill}</span>
-                    <div className="flex items-center space-x-2">
-                      <div className="w-16 h-2 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
+                    <span className="text-sm lg:text-base text-gray-700 dark:text-gray-300 font-medium break-words">{skill}</span>
+                    <div className="flex items-center space-x-2 ml-2">
+                      <div className="w-12 lg:w-16 h-2 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
                         <motion.div
                           initial={{ width: 0 }}
                           whileInView={{ width: `${Math.random() * 40 + 60}%` }}
@@ -140,18 +140,18 @@ const Skills = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-16"
+          className="mt-12 lg:mt-16"
         >
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+          <div className="text-center mb-6 lg:mb-8">
+            <h3 className="text-xl lg:text-2xl font-bold text-gray-900 dark:text-white mb-3 lg:mb-4">
               Additional Skills
             </h3>
-            <p className="text-gray-600 dark:text-gray-300">
+            <p className="text-sm lg:text-base text-gray-600 dark:text-gray-300">
               I'm constantly learning and expanding my skill set to stay current with the latest technologies.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 lg:gap-4">
             {['Git', 'Docker', 'AWS', 'CI/CD', 'Agile', 'REST APIs', 'GraphQL', 'Testing', 'Performance', 'Security', 'SEO', 'Accessibility'].map((skill, index) => (
               <motion.div
                 key={skill}
@@ -160,9 +160,9 @@ const Skills = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
                 whileHover={{ scale: 1.05 }}
-                className="card p-4 text-center card-hover"
+                className="card p-3 lg:p-4 text-center card-hover"
               >
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{skill}</span>
+                <span className="text-xs lg:text-sm font-medium text-gray-700 dark:text-gray-300 break-words">{skill}</span>
               </motion.div>
             ))}
           </div>
@@ -173,16 +173,16 @@ const Skills = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-16 card p-8"
+          className="mt-12 lg:mt-16 card p-6 lg:p-8"
         >
           <div className="text-center">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+            <h3 className="text-xl lg:text-2xl font-bold text-gray-900 dark:text-white mb-3 lg:mb-4">
               Currently Learning
             </h3>
-            <p className="text-gray-600 dark:text-gray-300 mb-6">
+            <p className="text-sm lg:text-base text-gray-600 dark:text-gray-300 mb-4 lg:mb-6">
               I'm always excited to learn new technologies and frameworks.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-3 lg:gap-4">
               {['Next.js 14', 'TypeScript', 'GraphQL', 'Docker', 'AWS'].map((tech, index) => (
                 <motion.span
                   key={tech}
@@ -190,7 +190,7 @@ const Skills = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="px-4 py-2 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 rounded-full text-sm font-medium"
+                  className="px-3 lg:px-4 py-2 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 rounded-full text-xs lg:text-sm font-medium"
                 >
                   {tech}
                 </motion.span>
