@@ -7,45 +7,61 @@ const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const featuredProjects = getFeaturedProjects();
 
-  const filters = [
-    { id: 'all', label: 'All Projects' },
-    { id: 'featured', label: 'Featured' },
-    { id: 'website', label: 'Website' },
-    { id: 'frontend', label: 'Frontend' },
-    { id: 'backend', label: 'Backend' }
-  ];
+  // Dynamically generate filters from project data
+  const generateFilters = () => {
+    const baseFilters = [
+      { id: 'all', label: 'All Projects' },
+      { id: 'featured', label: 'Featured' }
+    ];
+
+    // Get all unique categories from projects
+    const allCategories = new Set();
+    projects.forEach(project => {
+      if (project.show !== false) { // Only consider visible projects
+        const categories = Array.isArray(project.category) ? project.category : [project.category];
+        categories.forEach(cat => allCategories.add(cat));
+      }
+    });
+
+    // Convert categories to filter objects
+    const categoryFilters = Array.from(allCategories).map(category => ({
+      id: category,
+      label: category.charAt(0).toUpperCase() + category.slice(1) // Capitalize first letter
+    }));
+
+    return [...baseFilters, ...categoryFilters];
+  };
+
+  const filters = generateFilters();
 
   // Use category-based filtering from the JSON data
   const getFilteredProjects = () => {
+    // First filter out projects that have show: false or don't have show property
+    const visibleProjects = projects.filter(project => project.show !== false);
+
+    let filteredProjects;
 
     switch (activeFilter) {
       case 'all':
-        return projects;
+        filteredProjects = visibleProjects;
+        break;
         
       case 'featured':
-        return featuredProjects;
-        
-      case 'website':
-        const websiteProjects = projects.filter(project => 
-          project.category === 'website'
-        );
-        return websiteProjects;
-        
-      case 'frontend':
-        const frontendProjects = projects.filter(project => 
-          project.category === 'frontend'
-        );
-        return frontendProjects;
-        
-      case 'backend':
-        const backendProjects = projects.filter(project => 
-          project.category === 'backend'
-        );
-        return backendProjects;
+        filteredProjects = featuredProjects.filter(project => project.show !== false);
+        break;
         
       default:
-        return projects;
+        // Handle dynamic categories
+        filteredProjects = visibleProjects.filter(project => {
+          // Handle both string and array categories for backward compatibility
+          const categories = Array.isArray(project.category) ? project.category : [project.category];
+          return categories.includes(activeFilter);
+        });
+        break;
     }
+
+    // Reverse the order to show newest first
+    return filteredProjects.reverse();
   };
 
   const filteredProjects = getFilteredProjects();
@@ -111,13 +127,6 @@ const Projects = () => {
           ))}
         </motion.div>
 
-        {/* Projects Count */}
-        <div className="text-center mb-6 lg:mb-8">
-          <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">
-            Showing {filteredProjects.length} of {projects.length} projects
-          </p>
-        </div>
-
         {/* Projects Grid */}
         <motion.div
           key={activeFilter}
@@ -135,39 +144,47 @@ const Projects = () => {
               >
                 {/* Project Image */}
                 <div className="relative h-48 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
-                      <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-                        {project.title.split(' ').map(word => word[0]).join('')}
-                      </span>
+                  {project.image ? (
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
+                        <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                          {project.title.split(' ').map(word => word[0]).join('')}
+                        </span>
+                      </div>
                     </div>
-                  </div>
+                  )}
                   
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 flex items-center justify-center">
                     <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 flex space-x-4">
-                      {project.github && (
-                        <motion.a
-                          whileHover={{ scale: 1.1 }}
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors duration-200"
-                        >
-                          <Github size={20} className="text-gray-700 group-hover:text-white" />
-                        </motion.a>
-                      )}
-                      {project.live && (
-                        <motion.a
-                          whileHover={{ scale: 1.1 }}
-                          href={project.live}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors duration-200"
-                        >
-                          <ExternalLink size={20} className="text-gray-700 group-hover:text-white" />
-                        </motion.a>
-                      )}
+                        {project.github && (
+                          <motion.a
+                            whileHover={{ scale: 1.1 }}
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors duration-200"
+                          >
+                            <Github size={20} className="text-gray-800 hover:text-white transition-colors duration-200" />
+                          </motion.a>
+                        )}
+                        {project.live && (
+                          <motion.a
+                            whileHover={{ scale: 1.1 }}
+                            href={project.live}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors duration-200"
+                          >
+                            <ExternalLink size={20} className="text-gray-800 hover:text-white transition-colors duration-200" />
+                          </motion.a>
+                        )}
                     </div>
                   </div>
 
@@ -181,11 +198,16 @@ const Projects = () => {
                   )}
 
                   {/* Category Badge */}
-                  <div className="absolute top-4 right-4">
-                    <span className="px-3 py-1 bg-gray-800 text-white text-xs font-medium rounded-full capitalize">
-                      {project.category}
-                    </span>
-                  </div>
+                  {/* <div className="absolute top-4 right-4 flex flex-wrap gap-1">
+                    {(Array.isArray(project.category) ? project.category : [project.category]).map((cat, index) => (
+                      <span 
+                        key={index}
+                        className="px-3 py-1 bg-gray-800 text-white text-xs font-medium rounded-full capitalize"
+                      >
+                        {cat}
+                      </span>
+                    ))}
+                  </div> */}
                 </div>
 
                 {/* Project Content */}

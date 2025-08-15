@@ -162,7 +162,7 @@ const About = () => {
             {/* Quick Stats */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 pt-6 lg:pt-8">
               <div className="text-center p-3 lg:p-4 bg-gray-50 dark:bg-gray-800 rounded-lg card-hover">
-                <div className="text-2xl lg:text-3xl font-bold text-blue-600 dark:text-blue-400 mb-1 lg:mb-2">3+</div>
+                <div className="text-2xl lg:text-3xl font-bold text-blue-600 dark:text-blue-400 mb-1 lg:mb-2">5+</div>
                 <div className="text-xs lg:text-sm text-gray-600 dark:text-gray-400 font-medium">Years Experience</div>
               </div>
               <div className="text-center p-3 lg:p-4 bg-gray-50 dark:bg-gray-800 rounded-lg card-hover">

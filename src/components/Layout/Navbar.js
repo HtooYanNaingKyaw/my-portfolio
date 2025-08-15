@@ -60,9 +60,9 @@ const Navbar = () => {
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Skills', href: '#skills' },
+    ...(portfolioConfig.showProjects ? [{ name: 'Projects', href: '#projects' }] : []),
     ...(portfolioConfig.showExperience ? [{ name: 'Experience', href: '#experience' }] : []),
     ...(portfolioConfig.showEducation ? [{ name: 'Education', href: '#education' }] : []),
-    { name: 'Projects', href: '#projects' },
     ...(portfolioConfig.showBlog ? [{ name: 'Blog', href: '#blog' }] : []),
     { name: 'Contact', href: '#contact' }
   ];

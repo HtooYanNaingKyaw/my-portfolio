@@ -20,9 +20,9 @@ function App() {
         <Hero />
         <About />
         <Skills />
+        {portfolioConfig.showProjects && <Projects />}
         {portfolioConfig.showExperience && <Experience />}
         {portfolioConfig.showEducation && <Education />}
-        <Projects />
         {portfolioConfig.showBlog && <Blog />}
         <Contact />
       </main>

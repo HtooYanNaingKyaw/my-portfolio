@@ -94,7 +94,7 @@ const Experience = () => {
                 }`}>
                   <div className="card p-4 lg:p-6 hover:shadow-lg transition-all duration-300">
                     {/* Job Header */}
-                    <div className="flex items-start justify-between mb-3 lg:mb-4">
+                    <div className="flex items-start justify-between mb-3 lg:mb-4 text-left">
                       <div className="flex-1">
                         <h3 className="text-lg lg:text-xl font-bold text-gray-900 dark:text-white mb-1">
                           {job.position}
@@ -132,7 +132,7 @@ const Experience = () => {
 
                     {/* Achievements */}
                     {job.achievements && job.achievements.length > 0 && (
-                      <div>
+                      <div className='text-left'>
                         <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm lg:text-base">
                           Key Achievements:
                         </h4>

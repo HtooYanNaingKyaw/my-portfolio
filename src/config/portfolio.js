@@ -5,6 +5,9 @@ export const portfolioConfig = {
   // Show/Hide Blog Section
   showBlog: false, // Set to true when you want to show blog posts
   
+  // Show/Hide Projects Section
+  showProjects: true, // Set to false if you don't want to show projects
+  
   // Show/Hide Experience Section
   showExperience: true, // Set to false if you don't want to show work experience
   
